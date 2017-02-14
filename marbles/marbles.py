@@ -68,6 +68,10 @@ def detect_collision(player):
         counters[current_hole] += 1
 
         if counters[current_hole] == 8:
+            for i in range(0, 10):
+                display.set_pixel(holes[current_hole][0], holes[current_hole][1], 9-i)
+                sleep(50)
+
             counters.pop(current_hole)
             holes.pop(current_hole)
             current_hole = None
