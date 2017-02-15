@@ -128,14 +128,14 @@ while True:
         display.show(Image.YES)
         sleep(2000)
         display.scroll("Time: %ds" % int(score/1000), wait=False, loop=True)
-        break
+
+        while True:
+            if button_a.is_pressed() or button_b.is_pressed():
+                init()
+                break
     else:
         move_player(old_player, player)
         score += 250
 
     if button_a.is_pressed() or button_b.is_pressed():
-        reset()
-
-while True:
-    if button_a.is_pressed() or button_b.is_pressed():
-        reset()
+        init()
