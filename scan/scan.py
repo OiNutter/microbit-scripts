@@ -20,8 +20,6 @@ def scan(level,pause=500, reverse=False):
 
         sleep(pause)
 
-display.scroll("I am the Knight Industries 2000")
-
 while True:
 
     scan(9,150)
