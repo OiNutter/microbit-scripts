@@ -68,7 +68,7 @@ while True:
         elif plane == "diagleft":
             row_range = range(0, 10)
         elif plane == "diagright":
-            row_range == range(4, -6, -1)
+            row_range = range(4, -6, -1)
 
         for j in row_range:
             if plane == "horiz" or plane == "vert":
