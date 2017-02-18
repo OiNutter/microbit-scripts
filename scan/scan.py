@@ -2,9 +2,11 @@
 from microbit import *
 
 MAX_ROWS=4
+level = 9
 
-def scan(level,pause=500, reverse=False):
+def scan(pause=500, reverse=False):
     for i in range(0,10):
+
         x = 0
         rows = i
         cols = i
@@ -22,5 +24,5 @@ def scan(level,pause=500, reverse=False):
 
 while True:
 
-    scan(9,150)
+    scan(150)
     scan(150,True)
