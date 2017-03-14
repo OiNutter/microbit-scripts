@@ -12,6 +12,7 @@ Scripts
 * Marbles - Simple game based on the old rolling marble puzzles. Simply "roll" the light onto the marked pixels and keep it there long enough to eliminate it. Get all pixels to clear the board.
 * Morse - Simple morse code translator. Use the buttons to enter your message then see it printed out. Use the radio version to send it to another microbit.
 * Reflex - How fast are your reflexes? Click the button as soon as the light appears to get the maximum points, but make sure you click the right button.
+* Runner - Basic side scrolling block avoidance, in lights.
 * Scan - A simple diagonal scanning effect.
 * Spiral - Drawing spirals, because they're pretty.
 * Spirit - How level is your microbit?
