@@ -67,17 +67,25 @@ while True:
                 if x < 2:
 
                     if button_a.is_pressed():
+                        while button_a.is_pressed():
+                            continue
                         handle_correct_click(i)
                         break
                     elif button_b.is_pressed():
+                        while button_b.is_pressed():
+                            continue
                         score -= 10
 
                 elif x > 2:
 
                     if button_b.is_pressed():
+                        while button_b.is_pressed():
+                            continue
                         handle_correct_click(i)
                         break
                     elif button_a.is_pressed():
+                        while button_a.is_pressed():
+                            continue
                         score -= 10
 
                 new_time = running_time()
