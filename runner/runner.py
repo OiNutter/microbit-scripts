@@ -1,5 +1,6 @@
 from microbit import *
 import random
+from math import ceil
 
 MAX_COLS = 5
 PAUSE = 500
@@ -26,12 +27,13 @@ def handle_obstacles():
     if wait == 0:
         # Do we want to create block?
         if random.choice([True, False]):
-            blocks.append(MAX_COLS)
+            new_block = [MAX_COLS, random.choice([4, 4, 4, 3])]
+            blocks.append(new_block)
             wait = 2
 
             # Are we making this a double?
-            if random.choice([True, False]):
-                blocks.append(MAX_COLS+1)
+            if new_block[1] != 3 and random.choice([True, False]):
+                blocks.append([MAX_COLS+1, new_block[1]])
                 wait += 2
 
     else:
@@ -39,18 +41,19 @@ def handle_obstacles():
 
     # Draw the blocks
     for i in range(0, len(blocks)):
-        if blocks[i] < MAX_COLS:
+        if blocks[i][0] < MAX_COLS:
             # Hide the previous block position
-            if player[0] != blocks[i] or player[1] != 4:
-                display.set_pixel(blocks[i], 4, 0)
+            if blocks[i] != player:
+                display.set_pixel(blocks[i][0], blocks[i][1], 0)
 
         # Move the block
-        blocks[i] -= 1
-        if blocks[i] >= 0 and blocks[i] < MAX_COLS:
-            display.set_pixel(blocks[i], 4, 3)
+        blocks[i][0] -= 1
+        if blocks[i][0] >= 0 and blocks[i][0] < MAX_COLS:
+            display.set_pixel(blocks[i][0], blocks[i][1], 3)
 
+    print(blocks)
     # Clear any blocks that have gone off screen
-    while len(blocks) > 0 and blocks[0] == -1:
+    while len(blocks) > 0 and blocks[0][0] == -1:
         blocks.pop(0)
 
 def draw_player ():
@@ -78,21 +81,20 @@ def jump():
 def check_collision():
     global lives
 
-    # Check the player isn't jumping
-    if player[1] == 4:
-        # Is the player in the position of a block?
-        if player[0] in blocks:
-            # If so remove a life
-            display.set_pixel(4-lives+1, 0, 0)
-            lives -= 1
+    # Is the player in the position of a block?
+    print (player)
+    print (blocks)
+    print (tuple(player) in [tuple(block) for block in blocks])
+    if tuple(player) in [tuple(block) for block in blocks]:
+        # If so remove a life
+        display.set_pixel(4-lives+1, 0, 0)
+        lives -= 1
 
 def display_lives():
 
     if lives > 0:
         for i in range(4, 4 - lives, -1):
             display.set_pixel(i, 0, 5)
-
-init()
 
 display.scroll("RUNNER")
 
@@ -104,6 +106,7 @@ while True:
             sleep(0.1)
         break
 
+init()
 while True:
 
     while True:
@@ -141,7 +144,8 @@ while True:
 
             counter = running_time()
 
-        if round(running_time() / PAUSE) % 20 == 0:
+        running = running_time() - start
+        if running > 0 and (running / 1000) % 30 == 0:
             PAUSE -= 50
 
         if lives == 0:
@@ -149,12 +153,14 @@ while True:
         else:
             sleep(0.1)
 
-    display.scroll("SCORE: %ds" % round(running_time() - start), wait=False, loop=True)
+    display.scroll("SCORE: %ds" % (round(running_time() - start)/1000), wait=False, loop=True)
 
     sleep(100)
     while True:
 
         if button_a.is_pressed() or button_b.is_pressed():
+            while button_a.is_pressed():
+                continue
             init()
             display.clear()
             break
