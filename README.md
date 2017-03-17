@@ -8,6 +8,7 @@ Inside each folder you'll find a README explaining what the script does and how 
 Scripts
 -------
 
+* Concepts - A collection of tutorials on various bits of functionality that you can use in your programs.
 * KITT - Reproducing the Knight Rider car scanner with a microbit.
 * Marbles - Simple game based on the old rolling marble puzzles. Simply "roll" the light onto the marked pixels and keep it there long enough to eliminate it. Get all pixels to clear the board.
 * Morse - Simple morse code translator. Use the buttons to enter your message then see it printed out. Use the radio version to send it to another microbit.
